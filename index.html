@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            color: white;
+
+        }
+
+        .hero {
+            height: 100%;
+            width: 100%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(1.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: absolute;
+        }
+
+        #todo-container {
+            background: linear-gradient(rgba(62, 48, 82, 0.7), rgba(0, 0, 0, 0.7));
+            max-width: 400px;
+            width: 100%;
+            background-color: transparent;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: solid gray 1px;
+            margin: 120px auto;
+
+        }
+
+        #todo-header {
+            background-color: transparent;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+
+        }
+
+        #todo-list {
+            border: solid gray 1px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .todo-item {
+            border: solid gray 1px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .todo-item input[type="checkbox"] {
+            margin-right: 10px;
+            color: #fff;
+            border: solid rgb(240, 236, 236) 15px;
+        }
+
+        .todo-item .delete-btn {
+            background-color: #952dc1;
+            color: #fff;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 14px;
+            margin-left: 5%;
+
+        }
+
+        #todo-input {
+            width: 90%;
+            padding: 10px;
+            border: none;
+            border-bottom: 1px solid #dddddda1;
+            outline: none;
+            margin-left: 3%;
+            margin-top: 5%;
+            border-radius: 8px;
+        }
+
+
+        #add-btn {
+            width: 50%;
+            background-color: #770fb8;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-left: 25%;
+            margin-top: 10%;
+            margin-bottom: 10%;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero">
+
+        <div id="todo-container">
+
+            <div id="todo-header">To-Do List</div>
+            <ul id="todo-list"></ul>
+
+            <input type="text" id="todo-input" placeholder="Add a new task...">
+
+            <button id="add-btn">Add Task</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const todoList = document.getElementById('todo-list');
+            const todoInput = document.getElementById('todo-input');
+            const addBtn = document.getElementById('add-btn');
+
+            addBtn.addEventListener('click', function () {
+                const taskText = todoInput.value.trim();
+
+                if (taskText !== '') {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'todo-item';
+
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+
+                    const taskLabel = document.createElement('label');
+                    taskLabel.textContent = taskText;
+
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'delete-btn';
+                    deleteBtn.textContent = 'Delete';
+
+                    deleteBtn.addEventListener('click', function () {
+                        listItem.remove();
+                    });
+
+                    listItem.appendChild(checkbox);
+                    listItem.appendChild(taskLabel);
+                    listItem.appendChild(deleteBtn);
+
+                    todoList.appendChild(listItem);
+
+                    todoInput.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
